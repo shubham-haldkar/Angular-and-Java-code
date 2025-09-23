@@ -1,16 +1,58 @@
- 
 <div class="container mt-3">
   <h2>Post Form</h2>
   <!-- <p>Click inside the input field to see the floating label effect:</p> -->
-  <form [formGroup]="postForm" >
-    <div class="form-floating mb-3 mt-3">
-      <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
-      <label for="email"></label>
+  <form [formGroup]="postForm" class="was-validated">
+
+    <div class="mb-3 mt-3">
+      <label for="name" class="form-label">Name:</label>
+      <input type="text" formControlName="name" class="form-control" id="name" placeholder="Enter name" name="name"  formControlName="name" required/>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
     </div>
-    <div class="form-floating mt-3 mb-3">
-      <input type="text" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-      <label for="pwd">Password</label>
+    
+
+    <div class="mb-3 mt-3">
+      <label for="img" class="form-label">Image:</label>
+      <input type="text" formControlName="img" class="form-control" id="img" placeholder="Enter img URL" name="img"  formControlName="img" required/>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    
+
+    <div class="mb-3 mt-3">
+      <label for="content" class="form-label">Content:</label>
+      <textarea formControlName="content" class="form-control" id="content" placeholder="Enter content" name="content"  formControlName="content" required> </textarea>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    
+    <div class="mb-3 mt-3">
+      <label for="postedby" class="form-label">Posted By:</label>
+      <input type="text" formControlName="postedby" class="form-control" id="postedby" placeholder="Enter postedby " name="postedby"  formControlName="postedby" required/>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+ 
+    <div class="mb-3 mt-3">
+      <label for="tags" class="form-label">Tags:</label>
+    
+      <mat-chip-grid #chipGrid aria-label="Enter tags" class="form-control"  class="form-control">
+        <mat-chip-row *ngFor="let tag of tags ; let i = index" (removed)="remove(tag)" class="btn-primary" >
+          {{tag}}
+          <button matChipRemove >
+             <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        <input placeholder="New Tag..."
+        [matChipInputFor]="chipGrid"
+        (matChipInputTokenEnd)="add($event)"
+        class="form-control">
+      </mat-chip-grid>
+
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!postForm.valid" >Submit</button>
   </form>
-</div>
+</div> 

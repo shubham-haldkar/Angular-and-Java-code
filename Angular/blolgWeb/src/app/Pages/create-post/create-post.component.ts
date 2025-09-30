@@ -6,6 +6,7 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatIcon } from '@angular/material/icon';
 import { NgForOf } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
+import { PostServiceService } from '../../Services/post-service.service';
 
 @Component({
   selector: 'app-create-post',
@@ -20,15 +21,16 @@ $event: any;
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private snakbar: MatSnackBar
+    private snakbar: MatSnackBar,
+    private postService:PostServiceService 
   ) { }
 
   ngOnInit() {
     this.postForm = this.fb.group({
-      name: [null, Validators.required],
-      content: [null, Validators.required, Validators.maxLength(5000)],
-      img: [null, Validators.required],
-      postedBy: [null, Validators.required],
+      name: [null ],
+      content: [null , Validators.maxLength(5000)],
+      img: [null ],
+      postedBy: [null ],
     })
   }
 
@@ -47,6 +49,19 @@ $event: any;
     if (index>=0) {
       this.tags.splice(index,1) ;
     }
+  }
+
+  createPost(){
+    const data = this.postForm.value ;
+    data.tags=this.tags ;
+     
+    this.postService.createNewPost(data).subscribe(res=>{
+      this.snakbar.open("post created successfully ", "ok");
+      // this.router.navigateByUrl("/");
+    },error=>{
+      this.snakbar.open("something went wrong ", "ok");
+    }
+  )
   }
 
 }

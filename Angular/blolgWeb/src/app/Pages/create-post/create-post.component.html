@@ -27,8 +27,8 @@
     </div>
     
     <div class="mb-3 mt-3">
-      <label for="postedby" class="form-label">Posted By:</label>
-      <input type="text" formControlName="postedby" class="form-control" id="postedby" placeholder="Enter postedby " name="postedby"  formControlName="postedby" required/>
+      <label for="postedBy" class="form-label">Posted By:</label>
+      <input type="text" formControlName="postedBy" class="form-control" id="postedBy" placeholder="Enter postedBy " name="postedBy"  formControlName="postedBy" required/>
       <div class="valid-feedback">Valid.</div>
       <div class="invalid-feedback">Please fill out this field.</div>
     </div>
@@ -53,6 +53,6 @@
       <div class="invalid-feedback">Please fill out this field.</div>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="!postForm.valid" >Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!postForm.valid" (click)="createPost()" >Submit form </button>
   </form>
 </div> 

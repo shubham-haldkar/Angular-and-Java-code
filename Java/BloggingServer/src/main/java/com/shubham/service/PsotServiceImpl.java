@@ -1,12 +1,14 @@
-package service;
+package com.shubham.service;
 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.shubham.entity.Post;
 import com.shubham.repository.PostRepository;
 
+@Service
 public class PsotServiceImpl implements PostService {
 
 	@Autowired
